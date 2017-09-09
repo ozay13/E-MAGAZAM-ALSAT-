@@ -13,13 +13,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <table>
+        <table border="1">
             <h1><c:out value="${message}"/></h1>
         <c:forEach items="${products}" var="p">
             <tr>
-                <td>${p.id}</td>
-                <td>${p.productName}</td>
-                <td>${p.categoryId}</td>
+                <td>${p.id}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td>${p.productName}&nbsp;&nbsp;&nbsp;</td>
+                <td>${p.categoryId}&nbsp;&nbsp;&nbsp;</td>
             </tr>
         </c:forEach>
         </table>

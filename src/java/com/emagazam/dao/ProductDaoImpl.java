@@ -8,8 +8,8 @@ package com.emagazam.dao;
 import com.emagazam.model.Products;
 import java.util.ArrayList;
 import java.util.List;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -23,17 +23,18 @@ public class ProductDaoImpl implements ProductDao {
     public boolean insertProduct(Products product) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         boolean ret = true;
+        Transaction ts = null;
         try {
-            session.beginTransaction();
+            ts = session.beginTransaction();
             session.save(product);
 
         } catch (Exception e) {
             ret = false;
-            session.beginTransaction().rollback();
+            ts.rollback();
             e.printStackTrace();
 
         }
-        session.beginTransaction().commit();
+        ts.commit();
         if (session.isOpen()) {
             session.close();
         }
@@ -44,16 +45,17 @@ public class ProductDaoImpl implements ProductDao {
     public List<Products> allProductList() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<Products> list = new ArrayList<>();
+        Transaction ts = null;
         try {
-            session.beginTransaction();
-            list = session.createQuery("from product").list();
+           ts= session.beginTransaction();
+            list = session.createQuery("from Products").list();
 
         } catch (Exception e) {
-            session.beginTransaction().rollback();
+           ts.rollback();
             e.printStackTrace();
 
         }
-        session.beginTransaction().commit();
+        ts.commit();
         if (session.isOpen()) {
             session.close();
         }
@@ -64,15 +66,16 @@ public class ProductDaoImpl implements ProductDao {
     public Products findProduct(Long id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Products product = new Products();
+        Transaction ts = null;
         try {
-            session.beginTransaction();
+            ts=session.beginTransaction();
             product = (Products) session.get(Products.class, id);
         } catch (Exception e) {
             session.beginTransaction().rollback();
             e.printStackTrace();
 
         }
-        session.beginTransaction().commit();
+           ts.commit();
         if (session.isOpen()) {
             session.close();
         }
@@ -96,16 +99,17 @@ public class ProductDaoImpl implements ProductDao {
         Products p = findProduct(id);
         Session session = HibernateUtil.getSessionFactory().openSession();
         boolean ret = true;
+        Transaction ts = null;
         try {
-            session.beginTransaction();
+            ts=session.beginTransaction();
             session.delete(p);
         } catch (Exception e) {
             ret = false;
-            session.beginTransaction().rollback();
+            ts.rollback();
             e.printStackTrace();
 
         }
-        session.beginTransaction().commit();
+        ts.commit();
         if (session.isOpen()) {
             session.close();
         }
