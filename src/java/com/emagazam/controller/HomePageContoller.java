@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,11 +26,17 @@ public class HomePageContoller {
 
     @Autowired
     ProductDaoImplService service;
-
+    
+    
+    @ModelAttribute(value = "product")
+    public Products createProduct(){
+        return new Products();
+    }
+    
     @RequestMapping(value = "/")
     public ModelAndView indexPage() {
         ModelAndView mv = new ModelAndView("home");
-        mv.addObject("message", "Hoşgeldiniz");
+        mv.addObject("message", "Hoşgeldiniz......");
 //        Products p = new Products();
 //        p.setCategoryId(1L);
 //        p.setProductName("Bisküvi");
@@ -38,9 +45,8 @@ public class HomePageContoller {
 //        p.setModifiedDate(d);
 //        p.setCreationDate(d);
 //        service.insertProduct(p);
-        List<Products> pc = service.allProductList();
-
-        mv.addObject("products", pc);
+        
         return mv;
     }
+    
 }
