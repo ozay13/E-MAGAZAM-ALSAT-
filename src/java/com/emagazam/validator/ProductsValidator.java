@@ -28,7 +28,7 @@ public class ProductsValidator implements Validator {
 
         Products product = (Products) o;
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "productName", "required.productName");
-
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "categoryId", "required.categoryId");
         if ("NONE".equals(product.getProductName())) {
             errors.rejectValue("productName", "required.productName");
         }

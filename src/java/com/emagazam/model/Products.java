@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -28,18 +30,42 @@ public class Products implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
     private Long id;
+    @NotEmpty(message = "Lütfen ürün adı alanını boş gecmeyiniz!.")
+    @Size(max = 45, message = "Lütfen Karakter aralığını aşmayınız(1-45)")
     @Column(name = "product_name", length = 45, nullable = false)
     private String productName;
-    @Column(name = "brand_id")
-    private Long brandId;
     @Column(name = "category_id")
     private Long categoryId;
+    @Column(name = "brand_id")
+    private Long brandId;
     @Column(name = "creation_date")
+//    @DateTimeFormat(pattern = "dd/mm/yyyy")
     @Temporal(TemporalType.DATE)
     private Date creationDate;
     @Column(name = "modified_date")
     @Temporal(TemporalType.DATE)
     private Date modifiedDate;
+
+    public Products(Long id, String productName, Long brandId, Long categoryId, Date creationDate, Date modifiedDate) {
+        this.id = id;
+        this.productName = productName;
+        this.brandId = brandId;
+        this.categoryId = categoryId;
+        this.creationDate = creationDate;
+        this.modifiedDate = modifiedDate;
+    }
+
+    public Products(String productName, Long brandId, Long categoryId, Date creationDate, Date modifiedDate) {
+        this.productName = productName;
+        this.brandId = brandId;
+        this.categoryId = categoryId;
+        this.creationDate = creationDate;
+        this.modifiedDate = modifiedDate;
+    }
+
+    public Products() {
+        super();
+    }
 
     public Long getId() {
         return id;

@@ -13,12 +13,14 @@ import com.emagazam.service.CategoryDaoImplService;
 import com.emagazam.service.ProductDaoImplService;
 import com.emagazam.validator.EmailValidator;
 import com.emagazam.validator.ProductsValidator;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -38,7 +40,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class ProductManagerController {
 
     @Autowired
-    ProductDaoImplService service;
+    ProductDaoImplService productService;
     @Autowired
     BrandsDaoImplService brandService;
     @Autowired
@@ -67,18 +69,26 @@ public class ProductManagerController {
     public HashMap<Long, String> createBrandList() {
         HashMap<Long, String> m = new HashMap<>();
         List<Brands> list = brandService.allBrandList();
-        for (Brands categories : list) {
-            m.put(categories.getId(), categories.getBrandName());
+        for (Brands b : list) {
+            m.put(b.getId(), b.getBrandName());
         }
         return m;
     }
-
+    @ModelAttribute(value = "productList")
+    public List<Products> createProductList() {
+        HashMap<Long, String> m = new HashMap<>();
+        List<Products>list=productService.allProductList();
+        return list;
+     
+    }
+    
+    
     @InitBinder
     public void dataBinding(WebDataBinder binder) {
-        binder.addValidators(emailValidator, productValidator);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//        binder.addValidators(emailValidator, productValidator);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         dateFormat.setLenient(false);
-        binder.registerCustomEditor(Products.class, "creationDate", new CustomDateEditor(dateFormat, true));
+      binder.registerCustomEditor(Products.class, "creationDate", new CustomDateEditor(dateFormat, true));
     }
 
     @RequestMapping(value = "/")
@@ -88,9 +98,29 @@ public class ProductManagerController {
         return mv;
     }
 
+    @RequestMapping(value = "/product")
+    public String showPageProduct() {
+        return "newProduct";
+    }
+
     @RequestMapping(value = "/newProduct")
-    public ModelAndView newProduct(@ModelAttribute("product") @Validated Products product, BindingResult error) {
-        return new ModelAndView("newProduct");
+    public ModelAndView newProduct(@ModelAttribute("product")@Validated Products product, BindingResult error) {
+        ModelAndView mv =null;
+        if (error.hasErrors()) {
+           mv = new ModelAndView("newProduct");
+           
+        } else {
+            product.setModifiedDate(Calendar.getInstance().getTime());
+            boolean ret = productService.insertProduct(product);
+            System.out.println(">>>>>>"+product.getBrandId());
+            if (ret) {
+                return mv;
+            } else {
+                return new ModelAndView("redirect:/product");
+            }
+        }
+        return mv;
+
     }
 
 }

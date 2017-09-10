@@ -6,12 +6,15 @@
 package com.emagazam.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -29,10 +32,33 @@ public class Brands implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name ="brand_id")
     private Long id;
     @Column(name = "brand_name")
     private String brandName;
+   @Column(name = "creation_date")
+//    @DateTimeFormat(pattern = "dd/mm/yyyy")
+    @Temporal(TemporalType.DATE)
+    private Date creationDate;
+    @Column(name = "modified_date")
+    @Temporal(TemporalType.DATE)
+    private Date modifiedDate;
 
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public Date getModifiedDate() {
+        return modifiedDate;
+    }
+
+    public void setModifiedDate(Date modifiedDate) {
+        this.modifiedDate = modifiedDate;
+    }
     public Brands() {
         super();
     }

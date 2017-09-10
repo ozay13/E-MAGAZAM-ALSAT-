@@ -18,7 +18,7 @@
         <div>
             <table border="1">
                 <h1><c:out value="${message}"/></h1>
-                <a href="newProduct">Urun ekle</a>
+                <a href="product">Urun ekle</a>
                
         </div>
 
