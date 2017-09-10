@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public class ProductDaoImpl implements ProductDao {
-
+    
     @Override
     public boolean insertProduct(Products product) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -27,12 +27,12 @@ public class ProductDaoImpl implements ProductDao {
         try {
             ts = session.beginTransaction();
             session.save(product);
-
+            
         } catch (Exception e) {
             ret = false;
             ts.rollback();
             e.printStackTrace();
-
+            
         }
         ts.commit();
         if (session.isOpen()) {
@@ -40,20 +40,20 @@ public class ProductDaoImpl implements ProductDao {
         }
         return ret;
     }
-
+    
     @Override
     public List<Products> allProductList() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<Products> list = new ArrayList<>();
         Transaction ts = null;
         try {
-           ts= session.beginTransaction();
+            ts = session.beginTransaction();
             list = session.createQuery("from Products").list();
-
+            
         } catch (Exception e) {
-           ts.rollback();
+            ts.rollback();
             e.printStackTrace();
-
+            
         }
         ts.commit();
         if (session.isOpen()) {
@@ -61,27 +61,27 @@ public class ProductDaoImpl implements ProductDao {
         }
         return list;
     }
-
+    
     @Override
     public Products findProduct(Long id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Products product = new Products();
         Transaction ts = null;
         try {
-            ts=session.beginTransaction();
+            ts = session.beginTransaction();
             product = (Products) session.get(Products.class, id);
         } catch (Exception e) {
             session.beginTransaction().rollback();
             e.printStackTrace();
-
+            
         }
-           ts.commit();
+        ts.commit();
         if (session.isOpen()) {
             session.close();
         }
         return product;
     }
-
+    
     @Override
     public List<Products> findNameProduct(String productName) {
         List<Products> produtcs = allProductList();
@@ -93,7 +93,7 @@ public class ProductDaoImpl implements ProductDao {
         }
         return filter;
     }
-
+    
     @Override
     public boolean deleteProduct(Long id) {
         Products p = findProduct(id);
@@ -101,13 +101,13 @@ public class ProductDaoImpl implements ProductDao {
         boolean ret = true;
         Transaction ts = null;
         try {
-            ts=session.beginTransaction();
+            ts = session.beginTransaction();
             session.delete(p);
         } catch (Exception e) {
             ret = false;
             ts.rollback();
             e.printStackTrace();
-
+            
         }
         ts.commit();
         if (session.isOpen()) {
@@ -115,5 +115,27 @@ public class ProductDaoImpl implements ProductDao {
         }
         return ret;
     }
-
+    
+    @Override
+    public boolean updateProduct(Products p) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        boolean ret = true;
+        Transaction ts = null;
+        try {
+            ts = session.beginTransaction();
+            session.saveOrUpdate(p);
+            
+        } catch (Exception e) {
+            ret = false;
+            ts.rollback();
+            e.printStackTrace();
+            
+        }
+        ts.commit();
+        if (session.isOpen()) {
+            session.close();
+        }
+        return ret;
+    }
+    
 }

@@ -15,6 +15,7 @@ import java.util.List;
 
 public interface ProductDao {
     public boolean insertProduct(Products product);
+    public boolean updateProduct(Products p);
     public List<Products> allProductList();
     public Products findProduct(Long id);
     public List<Products> findNameProduct(String productName);

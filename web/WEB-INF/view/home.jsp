@@ -34,7 +34,9 @@
                         </tr>
                         <tr>
                             <td> <f:label path="categoryId" >Kategori:</f:label></td> 
-                            <td> <f:input path="categoryId" id="categoryId" /></td>
+                            <td> <f:select path="categoryId" id="categoryId" >
+                                    <f:options items="categoryList"/>
+                                </td>
                             <td> <f:errors id="categoryId"  /></td>
                         </tr>
                         <tr>

@@ -23,4 +23,5 @@ public interface ProductDaoService {
     public List<Products> findProduct(String productName);
 
     public boolean deleteProduct(Long id);
+    public boolean updateProduct(Products id);
 }

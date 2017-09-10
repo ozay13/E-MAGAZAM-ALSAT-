@@ -5,7 +5,6 @@
  */
 package com.emagazam.service;
 
-
 import com.emagazam.dao.ProductDaoImpl;
 import com.emagazam.model.Products;
 import java.util.List;
@@ -19,30 +18,28 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProductDaoImplService implements ProductDaoService {
-    
+
     @Autowired
     ProductDaoImpl productDao;
-    
 
     @Transactional
     @Override
     public boolean insertProduct(Products product) {
         return productDao.insertProduct(product);
     }
-    
 
     @Transactional
     @Override
     public List<Products> allProductList() {
         return productDao.allProductList();
     }
-    
+
     @Override
     @Transactional
     public Products findProduct(Long id) {
         return productDao.findProduct(id);
     }
-   
+
     @Transactional
     @Override
     public List<Products> findProduct(String productName) {
@@ -54,5 +51,11 @@ public class ProductDaoImplService implements ProductDaoService {
     public boolean deleteProduct(Long id) {
         return productDao.deleteProduct(id);
     }
-    
+
+    @Override
+    @Transactional
+    public boolean updateProduct(Products p) {
+        return productDao.updateProduct(p);
+    }
+
 }
