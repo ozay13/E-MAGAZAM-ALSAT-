@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
  */
 /* Kategori tablomun entity sınıfı(nesnesi,objesi)*/
 @Entity
-@Table(name = "category")
+@Table(name = "categories")
 public class Categories implements Serializable {
 
     @Id

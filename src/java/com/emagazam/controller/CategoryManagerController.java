@@ -12,6 +12,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -22,14 +24,19 @@ public class CategoryManagerController {
 
     @Autowired
     CategoryDaoImplService categoryService;
-
+      
     @ModelAttribute(value = "categoryList")
-    public HashMap<Long, String> createCategoryList() {
-        HashMap<Long, String> m = new HashMap<>();
+    public HashMap<Long,String> createCategoryList() {
+        HashMap<Long,String> m = new HashMap<>();
         List<Categories> list = categoryService.allCategoryList();
         for (Categories categories : list) {
-            m.put(categories.getId(), categories.getCategoryName());
+            m.put(categories.getId(),categories.getCategoryName());
+            
         }
         return m;
+    }
+    @RequestMapping(value = "/newCategory")
+    public ModelAndView newCategory(){
+        return new ModelAndView("category");
     }
 }

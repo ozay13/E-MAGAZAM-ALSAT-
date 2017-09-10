@@ -21,18 +21,18 @@ import javax.persistence.TemporalType;
  * @author ozaytunctan13
  */
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 public class Products implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
     private Long id;
-    @Column(name ="product_name",length = 45,nullable = false)
+    @Column(name = "product_name", length = 45, nullable = false)
     private String productName;
-    @Column(name ="product_marka",length = 45,nullable = false)
-    private String productMarka;
-    @Column(name ="category_id")
+    @Column(name = "brand_id")
+    private Long brandId;
+    @Column(name = "category_id")
     private Long categoryId;
     @Column(name = "creation_date")
     @Temporal(TemporalType.DATE)
@@ -40,9 +40,6 @@ public class Products implements Serializable {
     @Column(name = "modified_date")
     @Temporal(TemporalType.DATE)
     private Date modifiedDate;
-
-    
-    
 
     public Long getId() {
         return id;
@@ -60,12 +57,8 @@ public class Products implements Serializable {
         this.productName = productName;
     }
 
-    public String getProductMarka() {
-        return productMarka;
-    }
-
-    public void setProductMarka(String productMarka) {
-        this.productMarka = productMarka;
+    public Long getBrandId() {
+        return brandId;
     }
 
     public Long getCategoryId() {

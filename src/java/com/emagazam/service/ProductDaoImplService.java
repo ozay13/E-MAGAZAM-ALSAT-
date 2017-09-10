@@ -34,8 +34,9 @@ public class ProductDaoImplService implements ProductDaoService {
         return productDao.allProductList();
     }
 
-    @Override
     @Transactional
+    @Override
+
     public Products findProduct(Long id) {
         return productDao.findProduct(id);
     }
@@ -52,8 +53,8 @@ public class ProductDaoImplService implements ProductDaoService {
         return productDao.deleteProduct(id);
     }
 
-    @Override
     @Transactional
+    @Override
     public boolean updateProduct(Products p) {
         return productDao.updateProduct(p);
     }
