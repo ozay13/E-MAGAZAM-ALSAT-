@@ -17,7 +17,7 @@
     <body>
         <div>
             <div id="content">
-               
+
                 <f:form action="newProduct" commandName="product" method="POST"  >    
                     <table>
                         <tr>
@@ -34,13 +34,13 @@
                             </td>
                             <td> <f:errors path="categoryId"  cssClass="error"/></td>
                         </tr>
-                         <tr>
+                        <tr>
                             <td> <f:label path="brandId" >Marka Seciniz:</f:label></td> 
                             <td> <f:select items="${brandList}"  path="brandId" id="brandId" />
                             </td>
                             <td> <f:errors path="brandId"  cssClass="error"/></td>
                         </tr>
-                        <tr>
+
 
                         <tr>
                             <td> <f:label path="creationDate" >Oluşturma Tarihi:</f:label></td> 
@@ -53,12 +53,12 @@
                         <tr>                              
                             <td></td>
                             <td colspan="2">
-                                 <f:input type="submit" path="" name="action" value="Kaydet" />
-                                 <f:input type="submit" path=""  name="action" value="Vazgec" />
-                                </td>
-                            </tr>
+                                <f:input type="submit" path="" name="action" value="Kaydet" />
+                                <f:input type="submit" path=""  name="action" value="Vazgec" />
+                            </td>
+                        </tr>
 
-                        </table>  
+                    </table>  
 
                 </f:form>
             </div>
@@ -75,11 +75,11 @@
                             <th>Oluşturma Tarih</th>
                             <th>Değiştirme Tarih</th>
                         </tr>
-                            <td><c:out value="${p.productName}"/></td>
-                             <td><c:out value="${p.categoryId}"/></td>
-                              <td><c:out value="${p.brandId}"/></td>
-                              <td><c:out value="${p.creationDate}"/></td>
-                              <td><c:out value="${p.modifiedDate}"/></td>
+                        <td><c:out value="${p.productName}"/></td>
+                        <td><c:out value="${p.categoryId}"/></td>
+                        <td><c:out value="${p.brandId}"/></td>
+                        <td><c:out value="${p.creationDate}"/></td>
+                        <td><c:out value="${p.modifiedDate}"/></td>
                         </tr>
                     </c:forEach>
                 </table>

@@ -74,21 +74,21 @@ public class ProductManagerController {
         }
         return m;
     }
+
     @ModelAttribute(value = "productList")
     public List<Products> createProductList() {
         HashMap<Long, String> m = new HashMap<>();
-        List<Products>list=productService.allProductList();
+        List<Products> list = productService.allProductList();
         return list;
-     
+
     }
-    
-    
+
     @InitBinder
     public void dataBinding(WebDataBinder binder) {
 //        binder.addValidators(emailValidator, productValidator);
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         dateFormat.setLenient(false);
-      binder.registerCustomEditor(Products.class, "creationDate", new CustomDateEditor(dateFormat, true));
+        binder.registerCustomEditor(Products.class, "creationDate", new CustomDateEditor(dateFormat, true));
     }
 
     @RequestMapping(value = "/")
@@ -104,19 +104,22 @@ public class ProductManagerController {
     }
 
     @RequestMapping(value = "/newProduct")
-    public ModelAndView newProduct(@ModelAttribute("product")@Validated Products product, BindingResult error) {
-        ModelAndView mv =null;
+    public ModelAndView newProduct(@ModelAttribute("product") @Validated Products product, BindingResult error) {
+        ModelAndView mv = null;
         if (error.hasErrors()) {
-           mv = new ModelAndView("newProduct");
-           
+            mv = new ModelAndView("newProduct");
+
         } else {
             product.setModifiedDate(Calendar.getInstance().getTime());
             boolean ret = productService.insertProduct(product);
-            System.out.println(">>>>>>"+product.getBrandId());
+            System.out.println(">>>>>>" + product.getBrandId());
             if (ret) {
+                mv = new ModelAndView("redirect:/newProduct");
                 return mv;
             } else {
-                return new ModelAndView("redirect:/product");
+                mv = new ModelAndView("redirect:/newProduct");
+                mv.addObject("result", "Ürün Ekleme Başarısız");
+                return mv;
             }
         }
         return mv;

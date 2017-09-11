@@ -25,24 +25,42 @@ ORM (HIBERNATE)
 Urunlerin marka bilgileri tutulduğu entity nesnesidir.
 
 
-*/
+ */
 @Entity
 @Table(name = "brands")
 public class Brands implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="brand_id")
+    @Column(name = "brand_id")
     private Long id;
     @Column(name = "brand_name")
     private String brandName;
-   @Column(name = "creation_date")
+    @Column(name = "creation_date")
 //    @DateTimeFormat(pattern = "dd/mm/yyyy")
     @Temporal(TemporalType.DATE)
     private Date creationDate;
     @Column(name = "modified_date")
     @Temporal(TemporalType.DATE)
     private Date modifiedDate;
+
+    public Brands(Long id, String brandName, Date creationDate, Date modifiedDate) {
+        this.id = id;
+        this.brandName = brandName;
+        this.creationDate = creationDate;
+        this.modifiedDate = modifiedDate;
+    }
+
+    public Brands(String brandName, Date creationDate, Date modifiedDate) {
+
+        this.brandName = brandName;
+        this.creationDate = creationDate;
+        this.modifiedDate = modifiedDate;
+    }
+
+    public Brands() {
+        super();
+    }
 
     public Date getCreationDate() {
         return creationDate;
@@ -59,21 +77,6 @@ public class Brands implements Serializable {
     public void setModifiedDate(Date modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
-    public Brands() {
-        super();
-    }
-
-    public Brands(Long id, String markaName) {
-        super();
-        this.id = id;
-        this.brandName = markaName;
-    }
-
-    public Brands(String markaName) {
-        super();
-        this.brandName = markaName;
-    }
-
     public Long getId() {
         return id;
     }
