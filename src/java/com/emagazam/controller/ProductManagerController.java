@@ -93,7 +93,7 @@ public class ProductManagerController {
 
     @RequestMapping(value = "/")
     public ModelAndView indexPage() {
-        ModelAndView mv = new ModelAndView("home");
+        ModelAndView mv = new ModelAndView("index");
         mv.addObject("message", "Hoşgeldiniz......");
         return mv;
     }
