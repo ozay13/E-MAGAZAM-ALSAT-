@@ -7,12 +7,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib  prefix="f" uri="http://www.springframework.org/tags/form" %>
+  
 <!DOCTYPE html>
-<html>
+<html >
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
-        <link rel="stylesheet" href="resources/css/style.css"/>
+        <link rel="stylesheet" href="resources/css/style.css" />
     </head>
     <body>
         <div>
@@ -50,14 +51,17 @@
                         <tr>
                             <td></td>
                         </tr>
-                        <tr>                              
+                        <tr> 
+                                                       
                             <td></td>
                             <td colspan="2">
-                                <f:input type="submit" path="" name="action" value="Kaydet" />
-                                <f:input type="submit" path=""  name="action" value="Vazgec" />
+                                <f:input type="submit"  path="" name="action" value="Kaydet" />
                             </td>
+                             <td></td> 
                         </tr>
-
+                        <tr>
+                            <c:out value="${result}"/>
+                        </tr>
                     </table>  
 
                 </f:form>

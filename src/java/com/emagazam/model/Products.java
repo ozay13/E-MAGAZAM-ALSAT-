@@ -46,7 +46,15 @@ public class Products implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date modifiedDate;
 
-    public Products(Long id, String productName, Long brandId, Long categoryId, Date creationDate, Date modifiedDate) {
+    public Long getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(Long brandId) {
+        this.brandId = brandId;
+    }
+
+    public Products(Long id, String productName, Long categoryId, Long brandId, Date creationDate, Date modifiedDate) {
         this.id = id;
         this.productName = productName;
         this.brandId = brandId;
@@ -55,12 +63,8 @@ public class Products implements Serializable {
         this.modifiedDate = modifiedDate;
     }
 
-    public Products(String productName, Long brandId, Long categoryId, Date creationDate, Date modifiedDate) {
-        this.productName = productName;
-        this.brandId = brandId;
-        this.categoryId = categoryId;
-        this.creationDate = creationDate;
-        this.modifiedDate = modifiedDate;
+    public Products(String productName, Long categoryId,Long brandId,Date creationDate, Date modifiedDate) {
+         this(0L, productName, categoryId, brandId, creationDate, modifiedDate);
     }
 
     public Products() {
@@ -83,10 +87,7 @@ public class Products implements Serializable {
         this.productName = productName;
     }
 
-    public Long getBrandId() {
-        return brandId;
-    }
-
+  
     public Long getCategoryId() {
         return categoryId;
     }

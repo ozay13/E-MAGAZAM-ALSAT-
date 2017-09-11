@@ -36,6 +36,8 @@ public class Brands implements Serializable {
     private Long id;
     @Column(name = "brand_name")
     private String brandName;
+//    @Column(name = "category_id")
+//    private Long categoryId;
     @Column(name = "creation_date")
 //    @DateTimeFormat(pattern = "dd/mm/yyyy")
     @Temporal(TemporalType.DATE)
@@ -43,7 +45,7 @@ public class Brands implements Serializable {
     @Column(name = "modified_date")
     @Temporal(TemporalType.DATE)
     private Date modifiedDate;
-
+   
     public Brands(Long id, String brandName, Date creationDate, Date modifiedDate) {
         this.id = id;
         this.brandName = brandName;
@@ -58,6 +60,13 @@ public class Brands implements Serializable {
         this.modifiedDate = modifiedDate;
     }
 
+//    public Long getCategoryId() {
+//        return categoryId;
+//    }
+//
+//    public void setCategoryId(Long categoryId) {
+//        this.categoryId = categoryId;
+//    }
     public Brands() {
         super();
     }

@@ -114,7 +114,7 @@ public class ProductManagerController {
             boolean ret = productService.insertProduct(product);
             System.out.println(">>>>>>" + product.getBrandId());
             if (ret) {
-                mv = new ModelAndView("redirect:/newProduct");
+                mv = new ModelAndView("newProduct");
                 return mv;
             } else {
                 mv = new ModelAndView("redirect:/newProduct");
