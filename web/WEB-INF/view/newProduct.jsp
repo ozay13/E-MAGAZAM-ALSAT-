@@ -60,7 +60,8 @@
                              <td></td> 
                         </tr>
                         <tr>
-                            <c:out value="${result}"/>
+                            <td> <p style="color: red">${result}</p></td>
+                       
                         </tr>
                     </table>  
 
