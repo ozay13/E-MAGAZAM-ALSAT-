@@ -12,6 +12,7 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import org.springframework.stereotype.Component;
 
 
 
@@ -19,6 +20,7 @@ import javax.servlet.ServletResponse;
  *
  * @author ozaytunctan13
  */
+@Component
 public class FilterKarakter implements Filter {
 
     @Override

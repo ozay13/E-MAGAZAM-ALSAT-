@@ -20,7 +20,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -63,6 +62,7 @@ public class ProductManagerController {
         for (Categories categories : list) {
             m.put(categories.getId(), categories.getCategoryName());
         }
+        
         return m;
     }
 
@@ -79,6 +79,7 @@ public class ProductManagerController {
     @ModelAttribute(value = "productList")
     public List<Products> createProductList() {
         HashMap<Long, String> m = new HashMap<>();
+        
         List<Products> list = productService.allProductList();
         return list;
 
@@ -92,7 +93,7 @@ public class ProductManagerController {
         binder.registerCustomEditor(Products.class, "creationDate", new CustomDateEditor(dateFormat, true));
     }
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/home")
     public ModelAndView indexPage() {
         ModelAndView mv = new ModelAndView("home");
         mv.addObject("message", "Hoşgeldiniz......");
@@ -108,7 +109,7 @@ public class ProductManagerController {
     public ModelAndView newProduct(@ModelAttribute("product") @Validated Products product, BindingResult error) {
         ModelAndView mv = null;
         if (error.hasErrors()) {
-            mv = new ModelAndView("newProduct");
+            mv = new ModelAndView("redirect:/error");
 
         } else {
             product.setModifiedDate(Calendar.getInstance().getTime());
@@ -125,6 +126,10 @@ public class ProductManagerController {
         }
         return mv;
 
+    }
+    @RequestMapping("/error")
+    public ModelAndView errorPage(){
+        return new ModelAndView("error");
     }
 
 }

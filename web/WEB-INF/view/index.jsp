@@ -1,24 +1,17 @@
 <!doctype html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-   
-   <head>
-      <script src = "https://ajax.googleapis.com/ajax/libs/angularjs/1.5.2/angular.min.js"></script>
-   </head>
-   
-   <body ng-app = "myapp">
-      
-      <div ng-controller = "HelloController" >
-         <h2>Welcome {{helloTo.title}} to the world of Tutorialspoint!</h2>
-      </div>
-      
-      <script>
-         angular.module("myapp", [])
-         
-         .controller("HelloController", function($scope) {
-            $scope.helloTo = {};
-            $scope.helloTo.title = "Angular";
-         });
-      </script>
-      
-   </body>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Spring Security Basic Demo (XML)</title>
+</head>
+<body>
+    <div align="center">
+        <h1>Spring Security Basic Demo (XML)</h1>
+        <a href="/admin"> Admin Page</a>
+    </div>
+</body>
 </html>
